@@ -15,23 +15,27 @@
   <section class="rule">
     <h2>Rules of the Game</h2>
     <p id="rules">place a bet on the ball landing either on all red,black, or green numbers.</p>
-    <!-- <p id="rules">3 frogs = win</p>
-    <p id="rules">3 zebras = win</p>
-    <p id="rules">3 cows  = win</p>
-    <p id="rules">3 dogs = win</p> -->
     </section>
     <section class="bet">
     <button id="spin" type="button" name="button">spin the wheel ! </button>
+    <input type="number" id="userCashBet" name="userPlayBet" value="">
+    <button type="button" value = "red" id="red">red drop</button>
+    <button type="button" value = "black"id="black">black drop</button>
+    <button type="button" value = "green" id="green">green drop</button>
     <p id="ball_result">result</p>
+    <p id="userBetChoice"></p>
     </section>
 
     <form class="" action="/input" method="POST">
-      <input type="text" name="userBet" placeholder="Cash amount to bet">
+      <input type="text" name="playerName" placeholder="Player's Name">
+      <input type="text" name="pickNumber" placeholder="Pick Number 00-36">
+      <input type="number" name="userBet" placeholder="Play Cash">
       <button id="send" type="submit" name="button">Send Amount</button>
     </form>
-    <% if (bet.length > 0) { %>
+
+      <% if (bet.length > 0) { %>
       <p id="userB"><%= bet[0].bet %></p>
-    <% } %>
+      <% } %>
 
 <button id="reset" type="click" name="button">New Game</button>
 

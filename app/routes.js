@@ -4,16 +4,22 @@ module.exports = function(app, passport, db) {
 
     // show the home page (will also have our login links)
     app.get('/', function(req, res) {
-        res.render('index.ejs');
+        db.collection('bet').find().toArray((err, result) => {
+          if (err) return console.log(err)
+          console.log("Array: ", result);
+          res.render('index.ejs', {
+            bet: result
+          })
+        })
     });
 
     // PROFILE SECTION =========================
     app.get('/profile', isLoggedIn, function(req, res) {
-        db.collection('messages').find().toArray((err, result) => {
+        db.collection('bet').find().toArray((err, result) => {
           if (err) return console.log(err)
           res.render('profile.ejs', {
-            user : req.user,
-            messages: result
+            use : req.user,
+            bet: result
           })
         })
     });
@@ -26,8 +32,10 @@ module.exports = function(app, passport, db) {
 
 // message board routes ===============================================================
 
-    app.post('/messages', (req, res) => {
-      db.collection('messages').save({name: req.body.name, msg: req.body.msg, thumbUp: 0, thumbDown:0}, (err, result) => {
+    app.post('/input', (req, res) => {
+      var betValue = parseInt(req.body.userBet)
+      console.log(betValue)
+      db.collection('bet').save({bet: betValue, pickNumber: req.body.pickNumber,playerName:req.body.playerName, casinoCashflow:0, casinoWins:null, casinoLosses:null}, (err, result) => {
         if (err) return console.log(err)
         console.log('saved to database')
         res.redirect('/profile')
@@ -35,10 +43,12 @@ module.exports = function(app, passport, db) {
     })
 
     app.put('/lossBet', (req, res) => {
+      var betAmount = parseInt(req.body.amount)
       db.collection('bet')
       .findOneAndUpdate({bet: req.body.bet}, {
         $set: {
-          bet: req.body.bet - req.body.amount
+          bet: req.body.bet - req.body.amount,
+          casinoCashflow: betAmount
         }
       },{
         sort: {_id: -1},
@@ -50,10 +60,12 @@ module.exports = function(app, passport, db) {
     })
 
     app.put('/winBet', (req, res) => {
+      var betAmountLoss = parseInt(req.body.amount)
       db.collection('bet')
       .findOneAndUpdate({bet: req.body.bet}, {
         $set: {
-          bet:req.body.bet + req.body.amount * 10
+          bet: req.body.bet + req.body.amount * 2,
+          casinoCashflow:  res.body.casinoCashflow - betAmount
         }
       },{
         sort: {_id: -1},

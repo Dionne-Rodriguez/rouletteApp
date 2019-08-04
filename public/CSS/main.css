@@ -4,6 +4,10 @@ section h2 {
   font-size: 3rem;
 }
 
+#userBetChoice{
+  color: white
+}
+
 #option{
   text-align: center;
   color: white;

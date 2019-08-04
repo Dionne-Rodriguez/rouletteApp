@@ -1,22 +1,40 @@
-//randomnize - we need to randomize the possibility of getting 1 out of 5 items in one reel
+let redPick = document.getElementById('red')
+let blackPick = document.getElementById('black')
+let greenPick = document.getElementById('green')
 
-// document.getElementById('send').addEventListener('submit', () =>{
-//   // let userMoney = document.getElementById('betMoney').value
-//   console.log(userMoney)
-//   // fetch('betmoney', {
-//   //         method: 'put',
-//   //         headers: {'Content-Type': 'application/json'},
-//   //         body: JSON.stringify({
-//   //         'Money': userMoney
-//   //         })
-//   //       })
 
-//need to change this... add userMoney
+function checkWin (ballResult) {
+  let userBetChoice = document.getElementById('userBetChoice').innerHTML
+  console.log(userBetChoice, ballResult[1])
+  if (ballResult[1] === userBetChoice){
+    return true
+  }
+  else{
+    return false
+  }
+}
 
 document.getElementById('spin').addEventListener("click", function (){
     let ballResult = getBallResult()
-    console.log(ballResult)
-    // document.getElementById("reelOne").innerHTML= reelOne
+    let result = checkWin(ballResult,userBetChoice)
+    addMoneySubMoney(result)
+})
+
+
+
+
+
+
+redPick.addEventListener('click',function(){
+    document.getElementById('userBetChoice').innerHTML =  red.value
+})
+
+blackPick.addEventListener('click',function(){
+ document.getElementById('userBetChoice').innerHTML = blackPick.value
+})
+
+greenPick.addEventListener('click',function(){
+  document.getElementById('userBetChoice').innerHTML = greenPick.value
 })
 
 //resets the game and deletes the docuement in mongodb
@@ -44,156 +62,141 @@ reset.addEventListener('click', function() {
 })
 
 
-// function bet50(){
-//   console.log("50")
-//   bet(50)
-// }
-//
-// function bet5(){
-//   console.log("5")
-//   bet(5)
-// }
+
 
 function getBallResult(){
     let result = Math.ceil(Math.random()*38)
-    console.log(result)
+    let ballDrop = []
     if (result === 1) {
-      return 0
+      return ballDrop = [0 && "green"]
     }
     else if (result === 2){
-      return 00
+      return ballDrop = [00,"green"]
     }
     else if (result === 3){
-      return 1
+      return ballDrop = [ 1, "red"]
     }
     else if (result === 4){
-      return 2
+      return ballDrop = [ 2,"black"]
     }
     else if (result === 5){
-      return 3
+      return ballDrop = [ 3,"green"]
     }
     else if (result === 6){
-      return 4
+      return ballDrop = [ 4,"black"]
     }
     else if (result === 7){
-      return 5
+      return ballDrop = [ 5,"red"]
     }
     else if (result === 8){
-      return 6
+      return ballDrop = [ 6,"black"]
     }
     else if (result === 9){
-      return 7
+      return ballDrop = [ 7,"red"]
     }
     else if (result === 10){
-      return 8
+      return ballDrop = [ 8,"black"]
     }
     else if (result === 11){
-      return 9
+      return ballDrop = [ 9,"red"]
     }
     else if (result === 12){
-      return 10
+      return ballDrop = [10,"black"]
     }
     else if (result === 13){
-      return 11
+      return ballDrop = [11,"black"]
     }
     else if (result === 14){
-      return 12
+      return ballDrop = [12,"red"]
     }
     else if (result === 15){
-      return 13
+      return ballDrop = [13,"black"]
     }
     else if (result === 16){
-      return 14
+      return ballDrop = [14,"red"]
     }
     else if (result === 17){
-      return 15
+      return ballDrop = [15,"black"]
     }
     else if (result === 18){
-      return 16
+      return ballDrop = [16,"red"]
     }
     else if (result === 19){
-      return 17
+      return ballDrop = [17,"black"]
     }
     else if (result === 20){
-      return 18
+      return ballDrop = [18,"red"]
     }
     else if (result === 21){
-      return 19
+      return ballDrop = [19,"red"]
     }
     else if (result === 22){
-      return 20
+      return ballDrop = [20,"black"]
     }
     else if (result === 23){
-      return 21
+      return ballDrop = [21,"red"]
     }
     else if (result === 24){
-      return 22
+      return ballDrop = [22,"black"]
     }
     else if (result === 25){
-      return 23
+      return ballDrop = [23,"red"]
     }
     else if (result === 26){
-      return 24
+      return ballDrop = [24,"black"]
     }
     else if (result === 27){
-      return 25
+      return ballDrop = [25,"black"]
     }
     else if (result === 28){
-      return 26
+      return ballDrop = [26,"black"]
     }
     else if (result === 29){
-      return 27
+      return ballDrop = [27,"red"]
     }
     else if (result === 30){
-      return 28
+      return ballDrop = [28,"black"]
     }
     else if (result === 31){
-      return 29
+      return ballDrop = [29,"black"]
     }
     else if (result === 32){
-      return 30
+      return ballDrop = [30,"red"]
     }
     else if (result === 33){
-      return 31
+      return ballDrop = [31,"black"]
     }
     else if (result === 34){
-      return 32
+      return ballDrop = [32,"red"]
     }
     else if (result === 35){
-      return 33
+      return ballDrop = [33,"black"]
     }
     else if (result === 36){
-      return 34
+      return ballDrop = [34,"red"]
     }
     else if (result === 37){
-      return 35
+      return ballDrop = [35,"black"]
     }
     else if (result === 38){
-      return 36
+      return ballDrop = [36,"red"]
     }
 }
 
 
-function checkWin (reelOne, reelTwo, reelThree) {
-  if ((reelOne === reelTwo) && (reelOne == reelThree) ) {
-    return true
-  }
-  else{
-    return false
-  }
-}
 
 
-function addMoneySubMoney(win, amount){
-
+function addMoneySubMoney(win){
+  let amount = document.getElementById('userCashBet').value
+  console.log(amount)
   console.log(win);
   if (win) {
     fetch('winBet', {
       method: 'put',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        'bet':parseInt(document.getElementById('userB').textContent),
-        'amount': amount
+        'amount': amount,
+        'bet':parseInt(document.getElementById('userB').textContent)
       })
     }).then(response => {
       if (response.ok) return response.json()
@@ -217,57 +220,3 @@ function addMoneySubMoney(win, amount){
     })
   }
 }
-// })
-
-
-
-//- Create a function that choses a random throw of rock, paper, scissors, lizard, spock and alerts the random choice
-
-// function getRandomInt(max) {
-//   return Math.floor(Math.random() * Math.floor(max));
-// }
-//
-// function chooseRandom() {
-//   var randomInt = getRandomInt(4);
-//
-//   if (randomInt === 0) {
-//     alert('rock');
-//   }
-//   else if (randomInt === 1) {
-//     alert('scissors')
-//   }
-//   else if (randomInt === 2) {
-//     alert('lizard')
-//   }
-//   else if (randomInt === 3) {
-//     alert('spock')
-//   }
-//   else {
-//     alert('paper')
-//   }
-// }
-//
-// chooseRandom();
-
-
-
-// //count the score
-// function score(){
-//
-// }
-//
-//
-// //betting function
-// function moneybet(minBet, maxBet){
-// let minBet=document.getElementById('bet').value
-// let maxBet=document.getElementById('bet').value
-// }
-// moneyBet(5,50)
-// //
-// //determineWinner
-// function determineWinner(){
-//  if (3 ducks = win){  //syntax will be improved
-//
-//  }
-//  else if ( 2< ducks = lose)
-// }
